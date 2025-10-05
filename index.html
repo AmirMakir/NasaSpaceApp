@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Base Designer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header -->
+        <header id="game-header">
+            <h1>Space Base Designer</h1>
+            <div id="environment-selector">
+                <label for="environment">Environment:</label>
+                <select id="environment">
+                    <option value="moon">Moon (0.16g)</option>
+                    <option value="mars">Mars (0.38g)</option>
+                    <option value="orbit">Earth Orbit (microgravity)</option>
+                </select>
+            </div>
+            <div id="crew-controls">
+                <label for="crew-count">Crew Size:</label>
+                <input type="number" id="crew-count" min="1" max="12" value="4">
+            </div>
+            <div id="mission-duration">
+                <label for="duration">Mission Duration (days):</label>
+                <input type="number" id="duration" min="1" max="365" value="30">
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <main id="game-main">
+            <!-- Sidebar -->
+            <aside id="sidebar">
+                <div id="module-palette">
+                    <h3>Modules</h3>
+                    <div class="module-item" data-type="kitchen">
+                        <div class="module-icon">🍳</div>
+                        <span>Kitchen</span>
+                    </div>
+                    <div class="module-item" data-type="lab">
+                        <div class="module-icon">🔬</div>
+                        <span>Laboratory</span>
+                    </div>
+                    <div class="module-item" data-type="gym">
+                        <div class="module-icon">💪</div>
+                        <span>Gym</span>
+                    </div>
+                    <div class="module-item" data-type="sleeping">
+                        <div class="module-icon">🛏️</div>
+                        <span>Sleeping</span>
+                    </div>
+                    <div class="module-item" data-type="hygiene">
+                        <div class="module-icon">🚿</div>
+                        <span>Hygiene</span>
+                    </div>
+                    <div class="module-item" data-type="storage">
+                        <div class="module-icon">📦</div>
+                        <span>Storage</span>
+                    </div>
+                    <div class="module-item" data-type="medical">
+                        <div class="module-icon">🏥</div>
+                        <span>Medical</span>
+                    </div>
+                    <div class="module-item" data-type="recreation">
+                        <div class="module-icon">🎮</div>
+                        <span>Recreation</span>
+                    </div>
+                </div>
+
+                <div id="resource-panel">
+                    <h3>Resources</h3>
+                    <div class="resource-item">
+                        <span class="resource-label">Food:</span>
+                        <div class="resource-bar">
+                            <div class="resource-fill" id="food-bar"></div>
+                        </div>
+                        <span class="resource-status" id="food-status">OK</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-label">Water:</span>
+                        <div class="resource-bar">
+                            <div class="resource-fill" id="water-bar"></div>
+                        </div>
+                        <span class="resource-status" id="water-status">OK</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-label">Oxygen:</span>
+                        <div class="resource-bar">
+                            <div class="resource-fill" id="oxygen-bar"></div>
+                        </div>
+                        <span class="resource-status" id="oxygen-status">OK</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-label">Exercise:</span>
+                        <div class="resource-bar">
+                            <div class="resource-fill" id="exercise-bar"></div>
+                        </div>
+                        <span class="resource-status" id="exercise-status">OK</span>
+                    </div>
+                    <div class="resource-item">
+                        <span class="resource-label">Radiation:</span>
+                        <div class="resource-bar">
+                            <div class="resource-fill" id="radiation-bar"></div>
+                        </div>
+                        <span class="resource-status" id="radiation-status">OK</span>
+                    </div>
+                </div>
+
+                <div id="base-stats">
+                    <h3>Base Statistics</h3>
+                    <div class="stat-item">
+                        <span>Total Area:</span>
+                        <span id="total-area">0 m²</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Modules:</span>
+                        <span id="module-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Connected:</span>
+                        <span id="connected-status">❌</span>
+                    </div>
+                </div>
+
+                <div id="mission-scenarios">
+                    <h3>Mission Scenarios</h3>
+                    <select id="scenario-select">
+                        <option value="custom">Custom Mission</option>
+                        <option value="lunar-research">Lunar Research (4 crew, 30 days)</option>
+                        <option value="mars-colony">Mars Colony (6 crew, 90 days)</option>
+                        <option value="orbital-lab">Orbital Laboratory (8 crew, 180 days)</option>
+                    </select>
+                </div>
+
+                <div id="action-buttons">
+                    <button id="save-design">Save Design</button>
+                    <button id="load-design">Load Design</button>
+                    <button id="clear-base">Clear Base</button>
+                    <button id="export-image">Export Image</button>
+                </div>
+            </aside>
+
+            <!-- Canvas Area -->
+            <div id="canvas-container">
+                <canvas id="game-canvas" width="800" height="600"></canvas>
+                <div id="base-outline"></div>
+            </div>
+        </main>
+
+        <!-- AI Helper / Warnings Panel -->
+        <div id="ai-panel">
+            <div class="ai-header">
+                <h3>AI Helper</h3>
+                <div class="ai-controls">
+                    <label class="switch">
+                        <input type="checkbox" id="ai-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="ai-toggle-label">Use AI instead of warnings</span>
+                    <button id="ai-analyze">Ask AI</button>
+                </div>
+            </div>
+            <div id="ai-content" class="ai-content"></div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

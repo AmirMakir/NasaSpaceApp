@@ -9,7 +9,7 @@
     "dev": "nodemon server.js",
     "lint": "eslint .",
     "test": "jest",
-    "build": "node -e \"console.log('No build step required for this project');\""
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

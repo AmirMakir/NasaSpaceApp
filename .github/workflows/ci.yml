@@ -88,4 +88,10 @@ jobs:
       with:
         github_token: ${{ secrets.GH_PAGES_DEPLOY_TOKEN }}
         publish_dir: ./dist
+<<<<<<< HEAD
         cname: nasa-space-base-designer.example.com
+=======
+        # cname: nasa-space-base-designer.example.com
+
+
+>>>>>>> f7abbc7f42d5560dbe359f35b87aa4a845047dfb

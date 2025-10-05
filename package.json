@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,6 +18,12 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "coverage"
   }
 }

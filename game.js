@@ -707,7 +707,6 @@ class SpaceBaseGame {
     }
 
     drawBackgroundEffects() {
-        const env = this.environments[this.environment];
         
         // Draw stars for space environments
         if (this.environment === 'orbit' || this.environment === 'moon') {
